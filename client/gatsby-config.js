@@ -1,3 +1,8 @@
+let env = process.env.NODE_ENV || "development"
+
+console.log(`using enviroment config: ${env}`)
+require("dotenv").config({ path: `.env.${env}` })
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,

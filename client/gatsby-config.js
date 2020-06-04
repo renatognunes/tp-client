@@ -1,7 +1,9 @@
 let env = process.env.NODE_ENV || "development"
 
 console.log(`using enviroment config: ${env}`)
-require("dotenv").config({ path: `.env.${env}` })
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 
 module.exports = {
   siteMetadata: {

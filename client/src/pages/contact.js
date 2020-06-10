@@ -1,4 +1,6 @@
 import React, { useState } from "react"
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 import { Link } from "gatsby"
 import ContactStyles from "../components/ContactPage.module.scss"
 import Header from "../components/sub-pages-header"
@@ -9,7 +11,10 @@ import classNames from "classnames"
 import "../styles/global.scss"
 import axios from "axios"
 import { useForm } from "react-hook-form"
+import SEO from "../components/seo"
+import { Helmet } from "react-helmet"
 
+toast.configure()
 const Contact = props => {
   const [state, setState] = useState({
     name: "",
@@ -23,17 +28,39 @@ const Contact = props => {
     setState({ ...state, [e.target.name]: e.target.value })
   }
 
+  const notify = () => {
+    toast.success(
+      '"Your message has been successfully sent. We will contact you very soon!"',
+      {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+      }
+    )
+  }
+
   const { register, handleSubmit } = useForm()
   const onSubmit = async data => {
     const { name, email, phone, subject, message } = data
-    const res = await axios.post("/api/form/", {
-      name,
-      email,
-      phone,
-      subject,
-      message,
-    })
+    const res = await axios.post(
+      "https://server-tp.herokuapp.com/",
+      {
+        name,
+        email,
+        phone,
+        subject,
+        message,
+      },
+      {
+        headers: { "Content-Type": undefined },
+      }
+    )
     if (res.status === 200) {
+      notify()
       setState({
         name: "",
         email: "",
@@ -46,6 +73,12 @@ const Contact = props => {
 
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Contact</title>
+        <link rel="canonical" href="http://teampoker.com/contact" />
+      </Helmet>
+      <SEO title="Contact" />
       <Header
         image="contact.jpg"
         text={<span>CONTACT US</span>}
@@ -128,11 +161,7 @@ const Contact = props => {
               />
             </div>
             <div className={ContactStyles.submit}>
-              <button
-                type="submit"
-                // onClick={handleSubmit}
-                className={ContactStyles.button}
-              >
+              <button type="submit" className={ContactStyles.button}>
                 Submit
               </button>
             </div>

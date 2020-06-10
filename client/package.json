@@ -1,7 +1,7 @@
 {
   "name": "gatsby-starter-default",
   "private": true,
-  "proxy": "http://localhost:3000",
+  "proxy": "https://server-tp.herokuapp.com",
   "description": "A simple starter to get up and developing quickly with Gatsby",
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
@@ -22,7 +22,7 @@
     "gatsby-image-background-slider": "0.0.1",
     "gatsby-plugin-manifest": "^2.2.31",
     "gatsby-plugin-offline": "^3.0.27",
-    "gatsby-plugin-react-helmet": "^3.1.16",
+    "gatsby-plugin-react-helmet": "^3.3.4",
     "gatsby-plugin-sass": "^2.1.27",
     "gatsby-plugin-sharp": "^2.3.5",
     "gatsby-source-contentful": "^2.3.1",
@@ -36,6 +36,7 @@
     "react-helmet": "^5.2.1",
     "react-hook-form": "^5.7.2",
     "react-spring": "^8.0.27",
+    "react-toastify": "^6.0.5",
     "resize-observer-polyfill": "^1.5.1"
   },
   "devDependencies": {
